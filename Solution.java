@@ -1,80 +1,74 @@
 
-import kotlin.math.abs
-import kotlin.math.min
-import kotlin.math.max
+public class Solution {
 
-class Solution {
+    private static final int[] MIN_MOVES_RANGE = {1, 2};
 
-    private companion object {
-        val MIN_MOVES_RANGE = intArrayOf(1, 2)
-    }
+    private int rookRow;
+    private int rookColumn;
+    private int bishopRow;
+    private int bishopColumn;
+    private int queenRow;
+    private int queenColumn;
 
-    private var rookRow = 0
-    private var rookColumn = 0
-    private var bishopRow = 0
-    private var bishopColumn = 0
-    private var queenRow = 0
-    private var queenColumn = 0
-
-    fun minMovesToCaptureTheQueen(rookRow: Int, rookColumn: Int, bishopRow: Int, bishopColumn: Int, queenRow: Int, queenColumn: Int): Int {
-        this.rookRow = rookRow
-        this.rookColumn = rookColumn
-        this.bishopRow = bishopRow
-        this.bishopColumn = bishopColumn
-        this.queenRow = queenRow
-        this.queenColumn = queenColumn
+    public int minMovesToCaptureTheQueen(int rookRow, int rookColumn, int bishopRow, int bishopColumn, int queenRow, int queenColumn) {
+        this.rookRow = rookRow;
+        this.rookColumn = rookColumn;
+        this.bishopRow = bishopRow;
+        this.bishopColumn = bishopColumn;
+        this.queenRow = queenRow;
+        this.queenColumn = queenColumn;
 
         if (rookAndQueenAreOnSameRowWithUnobstructedPath()
             || rookAndQueenAreOnSameColumnWithUnobstructedPath()
             || bishopAndQueenAreOnSameDiagonalWithUnobstructedPath()) {
-            return MIN_MOVES_RANGE[0]
+            return MIN_MOVES_RANGE[0];
         }
-        return MIN_MOVES_RANGE[1]
+        return MIN_MOVES_RANGE[1];
     }
 
-    private fun rookAndQueenAreOnSameRowWithUnobstructedPath(): Boolean {
+    private boolean rookAndQueenAreOnSameRowWithUnobstructedPath() {
         if (rookRow != queenRow) {
-            return false
+            return false;
         }
         if (bishopRow != queenRow) {
-            return true
+            return true;
         }
 
-        val minColumn = min(rookColumn, queenColumn)
-        val maxColumn = max(rookColumn, queenColumn)
+        int minColumn = Math.min(rookColumn, queenColumn);
+        int maxColumn = Math.max(rookColumn, queenColumn);
 
-        return bishopColumn < minColumn || bishopColumn > maxColumn
+        return bishopColumn < minColumn || bishopColumn > maxColumn;
     }
 
-    private fun rookAndQueenAreOnSameColumnWithUnobstructedPath(): Boolean {
+    private boolean rookAndQueenAreOnSameColumnWithUnobstructedPath() {
         if (rookColumn != queenColumn) {
-            return false
+            return false;
         }
         if (bishopColumn != queenColumn) {
-            return true
+            return true;
         }
 
-        val minRow = min(rookRow, queenRow)
-        val maxRow = max(rookRow, queenRow)
+        int minRow = Math.min(rookRow, queenRow);
+        int maxRow = Math.max(rookRow, queenRow);
 
-        return bishopRow < minRow || bishopRow > maxRow
+        return bishopRow < minRow || bishopRow > maxRow;
     }
 
-    private fun bishopAndQueenAreOnSameDiagonalWithUnobstructedPath(): Boolean {
-        if (abs(bishopRow - queenRow) != abs(bishopColumn - queenColumn)) {
-            return false
+    private boolean bishopAndQueenAreOnSameDiagonalWithUnobstructedPath() {
+        if (Math.abs(bishopRow - queenRow) != Math.abs(bishopColumn - queenColumn)) {
+            return false;
         }
-        if (abs(bishopRow - rookRow) != abs(bishopColumn - rookColumn)) {
-            return true
+        if (Math.abs(bishopRow - rookRow) != Math.abs(bishopColumn - rookColumn)) {
+            return true;
         }
 
-        val minRow = min(bishopRow, queenRow)
-        val maxRow = max(bishopRow, queenRow)
+        int minRow = Math.min(bishopRow, queenRow);
+        int maxRow = Math.max(bishopRow, queenRow);
 
-        val minColumn = min(bishopColumn, queenColumn)
-        val maxColumn = max(bishopColumn, queenColumn)
+        int minColumn = Math.min(bishopColumn, queenColumn);
+        int maxColumn = Math.max(bishopColumn, queenColumn);
 
         return rookColumn < minColumn || rookColumn > maxColumn
-                || rookRow < minRow || rookRow > maxRow
+                || rookRow < minRow || rookRow > maxRow;
     }
 }
