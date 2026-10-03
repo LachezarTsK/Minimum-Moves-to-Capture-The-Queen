@@ -1,6 +1,5 @@
 
 function minMovesToCaptureTheQueen(rookRow: number, rookColumn: number, bishopRow: number, bishopColumn: number, queenRow: number, queenColumn: number): number {
-
     const movesCalculation = new MovesCalculation(rookRow, rookColumn, bishopRow, bishopColumn, queenRow, queenColumn);
     return movesCalculation.minMovesToCaptureTheQueen();
 };
@@ -17,10 +16,7 @@ class MovesCalculation {
     queenRow: number;
     queenColumn: number;
 
-    constructor(rookRow: number, rookColumn: number,
-        bishopRow: number, bishopColumn: number,
-        queenRow: number, queenColumn: number) {
-
+    constructor(rookRow: number, rookColumn: number, bishopRow: number, bishopColumn: number, queenRow: number, queenColumn: number) {
         this.rookRow = rookRow;
         this.rookColumn = rookColumn;
         this.bishopRow = bishopRow;
